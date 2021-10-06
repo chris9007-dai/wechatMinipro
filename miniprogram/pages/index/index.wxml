@@ -1,0 +1,16 @@
+<!--pages/index/index.wxml-->
+<view class="content">
+  <view class="login" wx:if="{{!shouFlag}}" bindtap="goLogin">
+    <button>去登陆</button>
+  </view>
+  <view class="shou" wx:else>
+    <view class="items" >
+      <view class="item"  wx:if="{{hasItems}}">
+        <text calss="item_name">文件名</text>
+        <text class="item_down">下载</text>
+        <text class="item_delete">删除</text>
+      </view>
+    </view>
+    <button class="uploud" bindtap="upLoud" >上传文件</button>
+  </view>
+</view>

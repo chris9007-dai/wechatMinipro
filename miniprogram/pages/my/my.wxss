@@ -1,0 +1,21 @@
+/* pages/my/my.wxss */
+.content{
+  background-color: #B6E48C;
+}
+.info{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+image{
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 50rpx; 
+  margin-left: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+text{
+  line-height: 100rpx;
+}

@@ -1,0 +1,23 @@
+.content{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.item{
+  position: relative;
+  width: 100vw;
+}
+.item_name{
+  position: absolute;
+  left: 20rpx;
+}
+.item_down{
+  position: absolute;
+  right: 200rpx;
+}
+.item_delete{
+  position: absolute;
+  right: 20rpx;
+}

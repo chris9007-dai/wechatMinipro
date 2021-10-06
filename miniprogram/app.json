@@ -1,0 +1,30 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/my/my"
+
+    
+  ],
+  "tabBar": {
+    "list":[
+      {
+        "pagePath": "pages/index/index",
+        "text":"首页"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text":"我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#B6E48C",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#B6E48C",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
