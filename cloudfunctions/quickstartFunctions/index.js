@@ -14,6 +14,6 @@ exports.main = async (event, context) => {
     case 'inquire':
       return await inquire.main(event,context)
     case 'deletBase':
-      return await deleteBase.mainn(event,context)
+      return await deleteBase.main(event,context)
   }
 }

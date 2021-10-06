@@ -92,7 +92,7 @@ Page({
     
   },
 
-  /* async delete(e){//删除函数
+  async delete(e){//删除函数
     let fileID = e.target.dataset.fileid 
     let filename = e.target.dataset.filename
     console.log(fileID,filename)
@@ -107,7 +107,7 @@ Page({
       console.log(res)
     })
 
-  }, */
+  },
   onLoad: function (options) {
     
   },

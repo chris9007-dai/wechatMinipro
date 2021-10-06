@@ -3,5 +3,5 @@ const db = cloud.database()
 cloud.init()
 
 exports.main = async (event,context)=>{
-  const fileID = event
+
 }
