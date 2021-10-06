@@ -7,12 +7,15 @@ exports.main = async (event, context) => {
   let fileName = event.fileName
   let stat = ""
 try{
-  stat = await db.collection("files").where({
+  stat = await db.collection("files").where({//查重
     userID:userID,
     fileName:fileName,
     fileID:fileID
   }).get().then(res=>{
-    console.log(res)
+    console.log(res.data)
+    if(res.data == ""){//没重复抛出错误，执行catch添加
+      throw error
+    }
     return "请勿重复"
   })
 }catch{

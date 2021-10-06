@@ -1,5 +1,5 @@
 // pages/index/index.js
-
+let db = wx.cloud.database()
 Page({
   
   /**
@@ -8,9 +8,7 @@ Page({
   data: {
     showFlag: "",
     hasItems: "true",
-    files:{
-      file_name:"1232132131"
-    }
+    files:''
   },
 
 
@@ -22,7 +20,8 @@ Page({
       url: '../my/my',
     })
   },
- async upLoud(e){
+  
+  async upLoud(e){ //上传函数
    let userID = wx.getStorageSync('userId')
    console.log(userID)
     let fileInfo = await wx.chooseMessageFile({
@@ -64,6 +63,51 @@ Page({
       
     })
   },
+
+  async downFile(e){//下载函数
+    let fileID = e.target.dataset.fileid 
+    let filename = e.target.dataset.filename
+    let filePath= await wx.cloud.downloadFile({
+      fileID:fileID
+    }).then((res)=>{
+      return res.tempFilePath
+    })
+    wx.downloadFile({
+      url: filePath,
+      success:(res)=>{
+        /* console.log(res) */
+        wx.getFileSystemManager().saveFile({
+          tempFilePath:res.tempFilePath,
+          filePath:wx.env.USER_DATA_PATH+"/"+filename,
+          success:(res)=>{
+            console.log(res)
+            wx.showToast({
+              title: '下载成功',
+            })
+          }
+        })
+      }
+    })
+    
+    
+  },
+
+  /* async delete(e){//删除函数
+    let fileID = e.target.dataset.fileid 
+    let filename = e.target.dataset.filename
+    console.log(fileID,filename)
+    wx.cloud.callFunction({
+      name: "quickstartFunctions",
+      data:{
+        type:"deleteBase",
+        fileID:fileID,
+        fileName:filename
+      }
+    }).then(res=>{
+      console.log(res)
+    })
+
+  }, */
   onLoad: function (options) {
     
   },
@@ -86,6 +130,21 @@ Page({
         shouFlag: true
       })
     }
+
+    if(this.data.shouFlag){
+       wx.cloud.callFunction({
+          name:"quickstartFunctions",
+          data:{
+            type: "inquire",
+            userID:userid
+          }
+        }).then((res=>{
+          this.setData({
+            files:res.result.data
+          })
+        }))
+      }
+    
   },
 
   /**

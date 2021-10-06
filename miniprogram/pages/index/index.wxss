@@ -4,11 +4,33 @@
   justify-content: center;
   align-items: center;
 }
-
-.item{
+.shou{
   position: relative;
   width: 100vw;
+  height: 100vh;
 }
+.items{
+  position: relative;
+  top:100rpx;
+}
+.uploud{
+  display: flex;
+  position: absolute;
+  right: 20rpx;
+  top: 10rpx;
+  width: 120rpx;
+  height: 50rpx;
+  border: 1rpx solid ;
+  background-color: aqua;
+  border-radius: 50rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .item{
+  
+} */
+
 .item_name{
   position: absolute;
   left: 20rpx;
