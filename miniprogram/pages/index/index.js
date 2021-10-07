@@ -7,8 +7,7 @@ Page({
    */
   data: {
     showFlag: "",
-    files:'',
-    hasItems:""
+    files:Array,
   },
 
 
@@ -156,14 +155,9 @@ Page({
             userID:userid
           }
         }).then((res=>{
-          
-          if(res.result.data.length!=0){
             this.setData({
               files:res.result.data,
-              hasItems: "true"
             })
-          }
-          
         }))
       }
     

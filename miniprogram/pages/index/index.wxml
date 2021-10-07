@@ -5,7 +5,7 @@
   </view>
   <view class="shou" wx:else>
     <view class="uploud" bindtap="upLoud" >上传</view>
-    <view class="items" wx:if="{{hasItems}}">
+    <view class="items" wx:if="{{files.length>0}}">
       <view class="item" wx:for="{{files}}" wx:key="*this">
         <image src="{{item.fileID}}" calss="itemImage" data-fileID="{{item.fileID}}" bindtap="preview"></image>
         <text class="item_delete" bindtap="delete" data-fileID="{{item.fileID}}" data-fileName="{{item.fileName}}">删除</text>
