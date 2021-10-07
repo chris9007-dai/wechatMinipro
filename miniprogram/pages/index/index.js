@@ -23,21 +23,19 @@ Page({
   
   async upLoud(e){ //上传函数
    let userID = wx.getStorageSync('userId')
-   console.log(userID)
-    let fileInfo = await wx.chooseMessageFile({
+   let fileInfo = await wx.chooseMessageFile({
       count: 1,
     }).then(res=>{
       return res.tempFiles
     })
-    console.log(fileInfo[0].name)
-    console.log(fileInfo[0].path)
+
     let fileID = await wx.cloud.uploadFile({
       cloudPath: fileInfo[0].name,
       filePath:fileInfo[0].path
     }).then(res=>{
       return res.fileID
     })
-    console.log(fileID)
+
     wx.cloud.callFunction({
       name:"quickstartFunctions",
       data:{
@@ -59,9 +57,9 @@ Page({
           icon:"error"
         })
       }
-      
-      
     })
+    this.onShow()
+    
   },
 
   async downFile(e){//下载函数
@@ -93,20 +91,33 @@ Page({
   },
 
   async delete(e){//删除函数
+    let userID = wx.getStorageSync('userId')
     let fileID = e.target.dataset.fileid 
     let filename = e.target.dataset.filename
     console.log(fileID,filename)
-    wx.cloud.callFunction({
+   await wx.cloud.callFunction({
       name: "quickstartFunctions",
       data:{
         type:"deleteBase",
         fileID:fileID,
-        fileName:filename
+        fileName:filename,
+        userID:userID
       }
     }).then(res=>{
-      console.log(res)
+      if(res.result=="删除成功"){
+        wx.showToast({
+          title: '删除成功',
+          icon:'success'
+        })
+      }else{
+        wx.showToast({
+          title: '删除失败',
+          icon:"error"
+        })
+      }
     })
-
+    
+    this.onShow()
   },
   onLoad: function (options) {
     

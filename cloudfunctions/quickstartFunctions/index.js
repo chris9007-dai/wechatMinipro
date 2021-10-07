@@ -13,7 +13,7 @@ exports.main = async (event, context) => {
       return await upLoudFile.main(event,context)
     case 'inquire':
       return await inquire.main(event,context)
-    case 'deletBase':
+    case 'deleteBase':
       return await deleteBase.main(event,context)
   }
 }
