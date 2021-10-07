@@ -27,11 +27,11 @@
   align-items: center;
 }
 
-/* .item{
-  
-} */
+.item{
+  margin-bottom: 20rpx;
+}
 
-.item_name{
+.itemImage{
   position: absolute;
   left: 20rpx;
 }
@@ -42,4 +42,11 @@
 .item_delete{
   position: absolute;
   right: 20rpx;
+  color: blue;
+}
+.remind{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

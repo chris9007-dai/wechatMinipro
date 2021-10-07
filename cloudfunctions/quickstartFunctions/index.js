@@ -2,8 +2,6 @@ const login = require('./login/index')
 const upLoudFile = require("./upLoudFile/index")
 const inquire = require("./inquire/index")
 const deleteBase = require("./deleteBase/index")
-
-
 // 云函数入口函数
 exports.main = async (event, context) => {
   switch (event.type) {

@@ -1,6 +1,8 @@
 const cloud = require("wx-server-sdk")
 const request = require("request-promise")
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 const db = cloud.database()
 exports.main = async (event, context) => {
   let {
@@ -15,7 +17,10 @@ exports.main = async (event, context) => {
   try{
     return await db.collection("users").where({
       openid: OPENID.toString()
-    }).get().then((res)=>{
+    }).get().then(res => {
+      /* if(!res.data[0]._id){
+        throw error
+      } */
       return res.data[0]._id
     })
   }catch{

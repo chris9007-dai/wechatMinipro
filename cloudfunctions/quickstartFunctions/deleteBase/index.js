@@ -1,15 +1,15 @@
 const cloud = require("wx-server-sdk")
 const db = cloud.database()
-cloud.init()
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 exports.main = async (event,context) => {
   fileID = event.fileID
-  fileName = event.fileName
   userID = event.userID
   fileList = []
 let result = await  db.collection("files").where({
     fileID:fileID,
-    fileName:fileName,
     userID:userID
   }).remove().then((res)=>{
     fileList.push(fileID)

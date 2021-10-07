@@ -7,6 +7,26 @@ Page({
     hasUserInfo:""
   },
 getUserInfo(e){
+  if(!wx.getStorageSync('userId')){
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          wx.cloud.callFunction({
+            name: "quickstartFunctions",
+            data: {
+              type: "login",
+              code: res.code
+            },
+            success: (res) => {
+              wx.setStorageSync('userId', res.result)
+            }
+          })
+        }
+      }
+    })
+  }
+  
+
   wx.getUserProfile({
     desc: '测试',
     success:(e)=>{
@@ -15,43 +35,6 @@ getUserInfo(e){
         userInfo:e.userInfo,
         hasUserInfo:true
       })
-    }
-  })
-  
-  wx.checkSession({
-    success: (res) => {
-      console.log("session有效")
-      var value = wx.getStorageSync('userInfo')
-      if (value) {
-        this.setData({
-          hasUserInfo: "true",
-          userInfo: value
-        })
-      }
-    },
-    fail: () => {
-      wx.clearStorage({
-        success: (res) => {
-          console.log("cleared")
-        },
-      })
-      wx.login({
-        success: (res) => {
-          if (res.code) {
-            wx.cloud.callFunction({
-              name: "quickstartFunctions",
-              data: {
-                type: "login",
-                code: res.code
-              },
-              success: (res) => {
-                wx.setStorageSync('userId', res.result)
-              }
-            })
-          }
-        }
-      })
-
     }
   })
   

@@ -6,14 +6,11 @@
   <view class="shou" wx:else>
     <view class="uploud" bindtap="upLoud" >上传</view>
     <view class="items" wx:if="{{hasItems}}">
-      
-      <view class="item" wx:for="{{files}}">
-        <text calss="item_name">{{item.fileName}}</text>
-        <text class="item_down" bindtap="downFile" data-fileID="{{item.fileID}}" data-fileName="{{item.fileName}}">下载</text>
+      <view class="item" wx:for="{{files}}" wx:key="*this">
+        <image src="{{item.fileID}}" calss="itemImage" data-fileID="{{item.fileID}}" bindtap="preview"></image>
         <text class="item_delete" bindtap="delete" data-fileID="{{item.fileID}}" data-fileName="{{item.fileName}}">删除</text>
       </view>
-    <!--   <view wx:else>暂无数据，点击右上角上传按钮上传哦</view> -->
     </view>
-    <!-- <button bindtap="upLoud" >上传文件</button> -->
+    <view class="remind" wx:else>暂无数据，点击右上角上传按钮上传哦</view>
   </view>
 </view>

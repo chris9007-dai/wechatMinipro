@@ -1,5 +1,4 @@
 {
-  "cloudfunctionRoot":"cloudfunctions/",
   "permissions": {
     "openapi": [
       "wxacode.get"

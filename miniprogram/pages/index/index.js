@@ -7,8 +7,8 @@ Page({
    */
   data: {
     showFlag: "",
-    hasItems: "true",
-    files:''
+    files:'',
+    hasItems:""
   },
 
 
@@ -23,26 +23,25 @@ Page({
   
   async upLoud(e){ //上传函数
    let userID = wx.getStorageSync('userId')
-   let fileInfo = await wx.chooseMessageFile({
+   let fileInfo = await wx.chooseImage({
       count: 1,
     }).then(res=>{
       return res.tempFiles
     })
 
     let fileID = await wx.cloud.uploadFile({
-      cloudPath: fileInfo[0].name,
+      cloudPath: fileInfo[0].size + ".jpg",
       filePath:fileInfo[0].path
     }).then(res=>{
       return res.fileID
     })
 
-    wx.cloud.callFunction({
+  await  wx.cloud.callFunction({
       name:"quickstartFunctions",
       data:{
         type:"upLoudFile",
         userID: userID,
         fileID: fileID,
-        fileName: fileInfo[0].name
       }
     }).then(res=>{
       console.log(res)
@@ -58,11 +57,12 @@ Page({
         })
       }
     })
+    
     this.onShow()
     
   },
 
-  async downFile(e){//下载函数
+ /*  async downFile(e){//下载函数
     let fileID = e.target.dataset.fileid 
     let filename = e.target.dataset.filename
     let filePath= await wx.cloud.downloadFile({
@@ -73,7 +73,6 @@ Page({
     wx.downloadFile({
       url: filePath,
       success:(res)=>{
-        /* console.log(res) */
         wx.getFileSystemManager().saveFile({
           tempFilePath:res.tempFilePath,
           filePath:wx.env.USER_DATA_PATH+"/"+filename,
@@ -88,6 +87,13 @@ Page({
     })
     
     
+  }, */
+
+  async preview(e){
+    let fileID = e.target.dataset.fileid
+    wx.previewImage({
+      urls: [fileID],
+    })
   },
 
   async delete(e){//删除函数
@@ -150,9 +156,14 @@ Page({
             userID:userid
           }
         }).then((res=>{
-          this.setData({
-            files:res.result.data
-          })
+          
+          if(res.result.data.length!=0){
+            this.setData({
+              files:res.result.data,
+              hasItems: "true"
+            })
+          }
+          
         }))
       }
     
