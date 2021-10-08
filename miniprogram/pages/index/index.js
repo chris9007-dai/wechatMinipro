@@ -29,7 +29,7 @@ Page({
     })
 
     let fileID = await wx.cloud.uploadFile({
-      cloudPath: fileInfo[0].size + ".jpg",
+      cloudPath: fileInfo[0].size + ".png",
       filePath:fileInfo[0].path
     }).then(res=>{
       return res.fileID
